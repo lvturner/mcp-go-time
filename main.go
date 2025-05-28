@@ -36,5 +36,5 @@ func dateToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.Cal
 }
 
 func timeToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	return mcp.NewToolResultText(fmt.Sprintf("The current local time is %s", time.Now().Format("15:34:11"))), nil
+	return mcp.NewToolResultText(fmt.Sprintf("The current local time is %s", time.Now().Format("15:04:05"))), nil
 }
