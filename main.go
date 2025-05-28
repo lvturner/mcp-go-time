@@ -25,6 +25,10 @@ func main() {
 		mcp.WithDescription(("Get the current local time")),
 	)
 	s.AddTool(timeTool, timeToolHandler)
+
+	if err := server.ServeStdio(s); err != nil {
+		fmt.Printf("Server error: %v\n", err)
+	}
 }
 
 func dateToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
