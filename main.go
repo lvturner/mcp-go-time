@@ -32,9 +32,9 @@ func main() {
 }
 
 func dateToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	return mcp.NewToolResultText(fmt.Sprintf("The current local date is %s", time.DateOnly)), nil
+	return mcp.NewToolResultText(fmt.Sprintf("The current local date is %s", time.Now().Format("2006-01-02"))), nil
 }
 
 func timeToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-	return mcp.NewToolResultText(fmt.Sprintf("The current local date is %s", time.TimeOnly)), nil
+	return mcp.NewToolResultText(fmt.Sprintf("The current local time is %s", time.Now().Format("15:34:11"))), nil
 }
