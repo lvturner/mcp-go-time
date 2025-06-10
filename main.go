@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/mark3labs/mcp-go/mcp"
@@ -26,9 +27,16 @@ func main() {
 	)
 	s.AddTool(timeTool, timeToolHandler)
 
-	if err := server.ServeStdio(s); err != nil {
-		fmt.Printf("Server error: %v\n", err)
+	dateAndTimeTool := mcp.NewTool("get_local_datetime",
+		mcp.WithDescription("Get the current local date and time in ISO 8601 format"),
+	)
+	s.AddTool(dateAndTimeTool, dateAndTimeToolHandler)
+
+	httpServer := server.NewStreamableHTTPServer(s)
+	if err := httpServer.Start(fmt.Sprintf(":%s", os.Getenv("HTTP_PORT"))); err != nil {
+		fmt.Println("Failed to start HTTP server:", err)
 	}
+	fmt.Println("Started server")
 }
 
 func dateToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
@@ -37,4 +45,8 @@ func dateToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.Cal
 
 func timeToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 	return mcp.NewToolResultText(fmt.Sprintf("The current local time is %s", time.Now().Format("15:04:05"))), nil
+}
+
+func dateAndTimeToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	return mcp.NewToolResultText(fmt.Sprintf("The current local date and time is %s", time.Now())), nil
 }
