@@ -20,3 +20,7 @@ Example MCP JSON
   "command": "/path/to/mcp-go-time/mcp-go-time"
 }
 ```
+
+Learn something from this? Feel free to chuck a cup of coffee my way
+
+[![Tip in Crypto](https://tip.md/badge.svg)](https://tip.md/lvturner)
